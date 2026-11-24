@@ -1,0 +1,59 @@
+backend:
+  name: github
+  repo: nevolevy14-del/nevolevy-site   # filled in after the GitHub account exists
+  branch: main
+
+site_url: https://nevolevy.com
+media_folder: img
+public_folder: /img
+locale: en
+
+collections:
+  - name: site
+    label: "האתר"
+    files:
+      - name: content
+        label: "כל התוכן של האתר"
+        file: content/site.json
+        format: json
+        fields:
+          - label: "פתיחה"
+            name: hero
+            widget: object
+            fields:
+              - {label: "כותרת", name: title, widget: string}
+              - {label: "שורת משנה", name: subtitle, widget: string}
+              - {label: "תמונת פתיחה", name: image, widget: image}
+          - {label: "משפט אודות", name: statement, widget: text}
+          - label: "פרקים (צבא, מוזיקה, גלישה, טבע)"
+            name: chapters
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - {label: "מזהה (באנגלית, בלי רווחים)", name: id, widget: string}
+              - {label: "כותרת", name: title, widget: string}
+              - {label: "תיאור קצר", name: subtitle, widget: string}
+              - {label: "תמונת שער", name: cover, widget: image}
+              - {label: "כותרת הגלריה", name: reel_title, widget: string}
+              - {label: "תיאור הגלריה", name: reel_subtitle, widget: string}
+              - {label: "תמונות בגלריה", name: photos, widget: list, field: {label: "תמונה", name: photo, widget: image}}
+          - {label: "כותרת סרטים", name: films_title, widget: string}
+          - {label: "טקסט סרטים", name: films_text, widget: string}
+          - label: "סרטים"
+            name: films
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - {label: "מספר הסרטון ב-Vimeo (הספרות שבסוף הקישור)", name: vimeo_id, widget: string}
+              - {label: "שם הסרט", name: title, widget: string}
+              - {label: "סוג (קליפ, דוקומנטרי...)", name: kind, widget: string}
+              - {label: "אורך (למשל 2:30)", name: duration, widget: string}
+              - {label: "תמונה ממוזערת", name: thumbnail, widget: image}
+          - label: "צור קשר"
+            name: contact
+            widget: object
+            fields:
+              - {label: "כותרת", name: title, widget: string}
+              - {label: "טקסט", name: text, widget: string}
+              - {label: "טלפון לתצוגה", name: phone_display, widget: string}
+              - {label: "טלפון בפורמט בינלאומי (972...)", name: phone_intl, widget: string}

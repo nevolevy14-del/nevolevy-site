@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nevo Levy</title>
+<meta name="description" content="Nevo Levy — photography, directing and cinematography.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE  quiet, confident, cinematic — the work speaks, type stays out of the way
+   IDEA   an Apple product launch page, where the "product" is the photograph
+   PICTURE full-bleed frames that grow, settle and slide as you scroll
+   COLOUR and TYPE  true black, #f5f5f7 ink, one blue link accent; Inter, tight display tracking
+   LAYOUT hero > statement > four chapters (expanding cover + sideways reel) > films > contact */
+:root{color-scheme:dark;--bg:#000;--ink:#f5f5f7;--mute:#86868b;--line:#1d1d1f;--blue:#2997ff;--card:#0d0d0f}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:52px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto;z-index:50;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 max(4vw,18px);background:rgba(0,0,0,.55);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(255,255,255,.06);transition:background .3s}
+.nav .brand{font-weight:600;font-size:17px;letter-spacing:-.01em}
+.nav ul{display:flex;gap:clamp(14px,3vw,34px);list-style:none;margin:0;padding:0;font-size:13px;color:#d2d2d7}
+.nav ul a{padding:14px 0;transition:color .2s}.nav ul a:hover{color:#fff}
+
+/* hero */
+.hero{height:230vh;position:relative}
+.hero .stick{position:sticky;top:0;height:100vh;overflow:hidden;display:grid;place-items:end center}
+.hero .ph{position:absolute;inset:0;will-change:transform,filter}
+.hero .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,.15) 55%,#000 100%)}
+.hero .copy{position:relative;text-align:center;padding:0 20px 11vh;will-change:transform,opacity}
+.hero h1{font-size:clamp(56px,11vw,168px);line-height:.95;letter-spacing:-.045em;font-weight:700;margin:0}
+.hero p{margin:18px 0 0;font-size:clamp(17px,2vw,24px);font-weight:500;color:#d2d2d7;letter-spacing:-.01em}
+.hero .cue{margin-top:34px;font-size:13px;color:var(--mute)}
+
+/* statement */
+.statement{max-width:1100px;margin:0 auto;padding:18vh max(5vw,20px) 20vh}
+.statement p{font-size:clamp(30px,4.6vw,64px);line-height:1.12;letter-spacing:-.035em;font-weight:600;margin:0}
+.statement span{color:#2a2a2d;transition:color .35s}
+.statement span.on{color:var(--ink)}
+
+/* chapter */
+.chapter{position:relative}
+.chapter .grow{height:200vh;position:relative}
+.chapter .stick{position:sticky;top:0;height:100vh;display:grid;place-items:center;overflow:hidden}
+.chapter .frame{position:relative;width:62vw;height:62vh;border-radius:28px;overflow:hidden;will-change:width,height,border-radius}
+.chapter .frame img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);will-change:transform}
+.chapter .frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.7))}
+.chapter .title{position:absolute;left:0;right:0;bottom:9vh;text-align:center;z-index:2;padding:0 20px;will-change:opacity,transform}
+.chapter .title h2{font-size:clamp(44px,8vw,120px);line-height:1;letter-spacing:-.045em;font-weight:700;margin:0}
+.chapter .title p{margin:14px auto 0;max-width:560px;font-size:clamp(16px,1.6vw,21px);color:#d2d2d7}
+
+/* reel */
+.reel-wrap{padding:6vh 0 16vh}
+.reel-head{display:flex;justify-content:space-between;align-items:end;gap:20px;padding:0 max(5vw,20px) 22px;max-width:1440px;margin:0 auto}
+.reel-head h3{margin:0;font-size:clamp(24px,3vw,40px);letter-spacing:-.03em;font-weight:600;line-height:1.1}
+.reel-head h3 small{display:block;font-size:17px;font-weight:400;color:var(--mute);letter-spacing:0;margin-top:6px}
+.arrows{display:flex;gap:10px;flex:none}
+.arrows button{width:44px;height:44px;border-radius:50%;border:0;background:#1d1d1f;cursor:pointer;display:grid;place-items:center;transition:background .2s}
+.arrows button:hover{background:#2c2c2e}
+.arrows svg{width:18px;height:18px}
+.reel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px max(5vw,20px) 10px;scrollbar-width:none;scroll-padding-inline:max(5vw,20px)}
+.reel::-webkit-scrollbar{display:none}
+.reel button{flex:none;scroll-snap-align:start;height:min(68vh,640px);width:auto;border:0;padding:0;border-radius:18px;overflow:hidden;background:var(--card);cursor:zoom-in;position:relative}
+.reel img{height:100%;width:auto;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.reel button:hover img{transform:scale(1.035)}
+
+/* films */
+.films{padding:16vh max(5vw,20px) 14vh;max-width:1440px;margin:0 auto}
+.sect-h{font-size:clamp(44px,7vw,96px);line-height:1;letter-spacing:-.045em;font-weight:700;margin:0 0 14px}
+.sect-p{font-size:clamp(17px,1.8vw,22px);color:var(--mute);margin:0 0 7vh;max-width:620px}
+.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.film{position:relative;border:0;padding:0;border-radius:24px;overflow:hidden;background:var(--card);aspect-ratio:16/10;cursor:pointer;text-align:start}
+.film img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1),filter .6s}
+.film:hover img{transform:scale(1.04);filter:brightness(.85)}
+.film::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 50%,rgba(0,0,0,.8))}
+.film .meta{position:absolute;left:24px;right:24px;bottom:22px;z-index:2;display:flex;justify-content:space-between;align-items:end;gap:12px}
+.film b{font-size:clamp(20px,2.2vw,28px);letter-spacing:-.02em;font-weight:600;line-height:1.15}
+.film span{font-size:13px;color:#d2d2d7;white-space:nowrap}
+.play{position:absolute;inset:0;margin:auto;width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.18);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:grid;place-items:center;z-index:2;transition:transform .3s}
+.film:hover .play{transform:scale(1.08)}
+.play svg{width:26px;height:26px;margin-left:4px}
+
+/* contact */
+.contact{text-align:center;padding:18vh max(5vw,20px) 16vh;border-top:1px solid var(--line)}
+.contact h2{font-size:clamp(48px,9vw,136px);line-height:.98;letter-spacing:-.05em;font-weight:700;margin:0;text-wrap:balance}
+.contact p{color:var(--mute);font-size:clamp(17px,1.8vw,22px);margin:22px auto 40px;max-width:560px}
+.btns{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 26px;border-radius:980px;font-size:17px;font-weight:500}
+.btn.pri{background:var(--blue);color:#fff}.btn.pri:hover{background:#0077ed}
+.btn.sec{border:1px solid #424245;color:var(--ink)}.btn.sec:hover{border-color:#86868b}
+.phone{margin-top:26px;font-size:15px;color:var(--mute)}
+footer{border-top:1px solid var(--line);padding:22px max(5vw,20px);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:#6e6e73}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;padding:60px 70px}
+.lb.open{display:flex}
+.lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px;animation:pop .45s cubic-bezier(.2,.7,.2,1)}
+.lb .vid{width:min(1200px,100%);aspect-ratio:16/9;position:relative;background:#000;border-radius:14px;overflow:hidden}
+.lb .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.lb .alt{position:absolute;bottom:22px;left:0;right:0;text-align:center;font-size:14px;color:var(--mute)}
+.lb .alt a{color:var(--blue)}
+.lb .x,.lb .pv,.lb .nx{position:absolute;width:44px;height:44px;border-radius:50%;border:0;background:#1d1d1f;cursor:pointer;display:grid;place-items:center}
+.lb .x{top:16px;right:16px}.lb .pv{left:16px;top:50%}.lb .nx{right:16px;top:50%}
+.lb svg{width:18px;height:18px}
+@keyframes pop{from{opacity:0;transform:scale(.97)}}
+
+@media(max-width:760px){
+ .fgrid{grid-template-columns:minmax(0,1fr)}
+ .chapter .frame{width:86vw;height:56vh;border-radius:22px}
+ .reel button{height:58vh}
+ .lb{padding:56px 10px}.lb .pv,.lb .nx{top:auto;bottom:16px}
+ .nav ul{gap:16px}
+}
+@media(prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}
+ .hero{height:100vh}.chapter .grow{height:100vh}
+ .chapter .frame{width:100vw!important;height:100vh!important;border-radius:0!important}
+ .statement span{color:var(--ink)}
+}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Main">
+  <a class="brand" href="#top">Nevo Levy</a>
+  <ul><li><a href="#work">Work</a></li><li><a href="#films">Films</a></li><li><a href="#contact">Contact</a></li></ul>
+</nav>
+
+<header class="hero" id="top">
+  <div class="stick">
+    <div class="ph"><img id="heroImg" src="" alt=""></div>
+    <div class="shade"></div>
+    <div class="copy">
+      <h1 id="heroTitle"></h1>
+      <p id="heroSub"></p>
+      <div class="cue">Scroll</div>
+    </div>
+  </div>
+</header>
+
+<section class="statement" aria-label="About">
+  <p id="stmt"></p>
+</section>
+
+<main id="work"></main>
+
+<section class="films" id="films">
+  <h2 class="sect-h rv" id="filmsTitle"></h2>
+  <p class="sect-p rv" id="filmsText"></p>
+  <div class="fgrid" id="fgrid"></div>
+</section>
+
+<section class="contact" id="contact">
+  <h2 class="rv" id="cTitle"></h2>
+  <p class="rv" id="cText"></p>
+  <div class="btns rv">
+    <a class="btn pri" id="cWa" href="#">Message on WhatsApp</a>
+    <a class="btn sec" id="cTel" href="#">Call</a>
+  </div>
+  <div class="phone rv" id="cPhone"></div>
+</section>
+
+<footer><span>© 2026 Nevo Levy. All rights reserved.</span><span>Photography · Directing · Cinematography</span></footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Viewer">
+  <button class="x" id="lbx" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="pv" id="lbp" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <div id="lbc" style="display:contents"></div>
+  <button class="nx" id="lbn" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button>
+</div>
+
+<script>
+(async()=>{
+/* All content lives in /content/site.json and is edited at /admin */
+const S=await (await fetch('/content/site.json',{cache:'no-store'})).json();
+const CHAPTERS=S.chapters.map(c=>({...c,sub:c.subtitle,reel:c.reel_title,reelSub:c.reel_subtitle}));
+const FILMS=S.films.map(f=>({...f,id:f.vimeo_id,dur:f.duration}));
+const GAL={};CHAPTERS.forEach(c=>GAL[c.id]=c.photos.map(p=>[p,0]));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const $=id=>document.getElementById(id);
+$('heroImg').src=S.hero.image;$('heroTitle').textContent=S.hero.title;$('heroSub').textContent=S.hero.subtitle;
+$('stmt').textContent=S.statement;$('filmsTitle').textContent=S.films_title;$('filmsText').textContent=S.films_text;
+$('cTitle').textContent=S.contact.title;$('cText').textContent=S.contact.text;
+$('cWa').href='https://wa.me/'+encodeURIComponent(S.contact.phone_intl);$('cTel').href='tel:+'+encodeURIComponent(S.contact.phone_intl);
+$('cPhone').textContent='Phone & WhatsApp: '+S.contact.phone_display;
+const arrow=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="${d}"/></svg>`;
+
+document.getElementById('work').innerHTML=CHAPTERS.map(c=>`
+<section class="chapter" id="${c.id}">
+ <div class="grow"><div class="stick">
+  <div class="frame"><img src="${esc(c.cover)}" alt="${esc(c.title)}" loading="lazy"></div>
+  <div class="title"><h2>${esc(c.title)}</h2><p>${esc(c.sub)}</p></div>
+ </div></div>
+ <div class="reel-wrap">
+  <div class="reel-head rv"><h3>${esc(c.reel)}<small>${esc(c.reelSub)}</small></h3>
+   <div class="arrows"><button data-dir="-1" aria-label="Previous">${arrow('M15 5l-7 7 7 7')}</button><button data-dir="1" aria-label="Next">${arrow('M9 5l7 7-7 7')}</button></div></div>
+  <div class="reel" tabindex="0" aria-label="${esc(c.reel)} gallery">
+   ${GAL[c.id].map(([n,r],i)=>`<button data-cat="${c.id}" data-i="${i}" aria-label="Open photo ${i+1}"><img src="${esc(n)}" alt="" loading="lazy"></button>`).join('')}
+  </div>
+ </div>
+</section>`).join('');
+
+document.getElementById('fgrid').innerHTML=FILMS.map((f,i)=>`
+<button class="film rv" data-film="${i}" aria-label="Play ${esc(f.title)}">
+ <img src="${esc(f.thumbnail)}" alt="" loading="lazy">
+ <div class="play">${'<svg viewBox="0 0 24 24" fill="#fff"><path d="M6 4l15 8-15 8z"/></svg>'}</div>
+ <div class="meta"><b dir="auto">${esc(f.title)}</b><span>${esc(f.kind)} · ${esc(f.dur)}</span></div>
+</button>`).join('');
+
+/* statement words */
+const st=document.getElementById('stmt');
+st.innerHTML=st.textContent.split(' ').map(w=>`<span>${esc(w)}</span>`).join(' ');
+const words=[...st.children];
+
+/* reels: arrows + keys */
+for(const w of document.querySelectorAll('.reel-wrap')){
+ const reel=w.querySelector('.reel');
+ const go=d=>reel.scrollBy({left:d*reel.clientWidth*.8,behavior:reduce?'auto':'smooth'});
+ w.querySelectorAll('.arrows button').forEach(b=>b.addEventListener('click',()=>go(+b.dataset.dir)));
+ reel.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go(1)}if(e.key==='ArrowLeft'){e.preventDefault();go(-1)}});
+}
+
+/* lightbox */
+const lb=document.getElementById('lb'),lbc=document.getElementById('lbc');
+let cur=null;
+const show=()=>{
+ if(cur.type==='img'){const n=GAL[cur.cat][cur.i][0];lbc.innerHTML=`<img src="${esc(n)}" alt="">`}
+ else{const f=FILMS[cur.i];lbc.innerHTML=`<div class="vid"><iframe src="https://player.vimeo.com/video/${encodeURIComponent(f.id)}?autoplay=1&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="${esc(f.title)}"></iframe></div><div class="alt">Not playing? <a href="https://vimeo.com/${encodeURIComponent(f.id)}" target="_blank" rel="noopener">Watch on Vimeo</a></div>`}
+};
+const open=o=>{cur=o;show();lb.classList.add('open');document.body.style.overflow='hidden';document.getElementById('lbx').focus()};
+const close=()=>{lb.classList.remove('open');lbc.innerHTML='';document.body.style.overflow=''};
+const step=d=>{if(!cur)return;if(cur.type==='img'){const L=GAL[cur.cat].length;cur.i=(cur.i+d+L)%L}else{cur.i=(cur.i+d+FILMS.length)%FILMS.length}show()};
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-cat]');if(b){open({type:'img',cat:b.dataset.cat,i:+b.dataset.i});return}
+ const f=e.target.closest('[data-film]');if(f)open({type:'film',i:+f.dataset.film});
+});
+document.getElementById('lbx').onclick=close;
+document.getElementById('lbp').onclick=()=>step(-1);
+document.getElementById('lbn').onclick=()=>step(1);
+lb.addEventListener('click',e=>{if(e.target===lb)close()});
+addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1)});
+
+/* reveal */
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* scroll scenes */
+const hero=document.querySelector('.hero'),hph=hero.querySelector('.ph'),hcopy=hero.querySelector('.copy');
+const chs=[...document.querySelectorAll('.chapter .grow')].map(g=>({g,f:g.querySelector('.frame'),img:g.querySelector('.frame img'),t:g.querySelector('.title')}));
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const ease=t=>1-Math.pow(1-t,3);
+let ticking=false;
+const frame=()=>{
+ ticking=false;const vh=innerHeight,vw=innerWidth;
+ const hr=hero.getBoundingClientRect();const hp=clamp(-hr.top/(hr.height-vh));
+ hph.style.transform=`scale(${1.18-.18*ease(hp)})`;hph.style.filter=`brightness(${1-.45*hp})`;
+ hcopy.style.opacity=1-clamp((hp-.35)/.4);hcopy.style.transform=`translateY(${-60*hp}px)`;
+ const sr=st.getBoundingClientRect();const sp=clamp((vh*.85-sr.top)/(sr.height+vh*.3));
+ const on=Math.round(sp*words.length);words.forEach((w,i)=>w.classList.toggle('on',i<on));
+ for(const c of chs){
+  const r=c.g.getBoundingClientRect();const p=ease(clamp((vh-r.top)/(r.height)));
+  const small=vw<760;const w0=small?86:62,h0=small?56:62;
+  c.f.style.width=`${w0+(100-w0)*p}vw`;c.f.style.height=`${h0+(100-h0)*p}vh`;c.f.style.borderRadius=`${28*(1-p)}px`;
+  c.img.style.transform=`scale(${1.08-.08*p})`;
+  c.t.style.opacity=clamp((p-.45)/.3);c.t.style.transform=`translateY(${30*(1-clamp((p-.45)/.3))}px)`;
+ }
+};
+if(!reduce){addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(frame)}},{passive:true});addEventListener('resize',frame);frame()}
+else{chs.forEach(c=>c.t.style.opacity=1)}
+})();
+</script>
+</body>
+</html>

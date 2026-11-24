@@ -1,0 +1,168 @@
+{
+  "hero": {
+    "title": "Nevo Levy.",
+    "subtitle": "Photography. Directing. Cinematography.",
+    "image": "/img/military-01.jpg"
+  },
+  "statement": "I photograph and film people at their most real. Soldiers in the field, artists under stage light, surfers at first light, and the wild, quiet places in between.",
+  "chapters": [
+    {
+      "id": "military",
+      "title": "Military.",
+      "subtitle": "Documentary work from inside Israel’s special units.",
+      "cover": "/img/military-28.jpg",
+      "reel_title": "In the field",
+      "reel_subtitle": "Training, operations and the people behind them.",
+      "photos": [
+        "/img/military-00.jpg",
+        "/img/military-02.jpg",
+        "/img/military-03.jpg",
+        "/img/military-04.jpg",
+        "/img/military-05.jpg",
+        "/img/military-06.jpg",
+        "/img/military-07.jpg",
+        "/img/military-08.jpg",
+        "/img/military-09.jpg",
+        "/img/military-10.jpg",
+        "/img/military-11.jpg",
+        "/img/military-12.jpg",
+        "/img/military-13.jpg",
+        "/img/military-14.jpg",
+        "/img/military-15.jpg",
+        "/img/military-16.jpg",
+        "/img/military-17.jpg",
+        "/img/military-18.jpg",
+        "/img/military-19.jpg",
+        "/img/military-20.jpg",
+        "/img/military-21.jpg",
+        "/img/military-22.jpg",
+        "/img/military-23.jpg",
+        "/img/military-24.jpg",
+        "/img/military-25.jpg",
+        "/img/military-26.jpg",
+        "/img/military-27.jpg",
+        "/img/military-29.jpg",
+        "/img/military-30.jpg",
+        "/img/military-31.jpg",
+        "/img/military-32.jpg",
+        "/img/military-33.jpg",
+        "/img/military-34.jpg",
+        "/img/military-35.jpg"
+      ]
+    },
+    {
+      "id": "music",
+      "title": "Music.",
+      "subtitle": "Artists in the moment, on stage and off.",
+      "cover": "/img/music-02.jpg",
+      "reel_title": "On stage",
+      "reel_subtitle": "Concerts, portraits and music-video stills.",
+      "photos": [
+        "/img/music-00.jpg",
+        "/img/music-01.jpg",
+        "/img/music-03.jpg",
+        "/img/music-04.jpg",
+        "/img/music-11.jpg",
+        "/img/music-12.jpg",
+        "/img/music-13.jpg",
+        "/img/music-14.jpg",
+        "/img/music-15.jpg",
+        "/img/music-16.jpg",
+        "/img/music-18.jpg",
+        "/img/music-19.jpg",
+        "/img/music-20.jpg",
+        "/img/music-21.jpg",
+        "/img/music-22.jpg"
+      ]
+    },
+    {
+      "id": "surf",
+      "title": "Surf.",
+      "subtitle": "Portugal, first light, salt and stone.",
+      "cover": "/img/surf-10.jpg",
+      "reel_title": "Surf life",
+      "reel_subtitle": "Athletes and the coast that shapes them.",
+      "photos": [
+        "/img/surf-00.jpg",
+        "/img/surf-01.jpg",
+        "/img/surf-02.jpg",
+        "/img/surf-03.jpg",
+        "/img/surf-04.jpg",
+        "/img/surf-05.jpg",
+        "/img/surf-06.jpg",
+        "/img/surf-07.jpg",
+        "/img/surf-08.jpg",
+        "/img/surf-09.jpg",
+        "/img/surf-11.jpg"
+      ]
+    },
+    {
+      "id": "wild",
+      "title": "Wild.",
+      "subtitle": "Iceland in ice, fire and northern light.",
+      "cover": "/img/wild-03.jpg",
+      "reel_title": "Wild adventures",
+      "reel_subtitle": "Glaciers, horses, waterfalls and auroras.",
+      "photos": [
+        "/img/wild-00.jpg",
+        "/img/wild-01.jpg",
+        "/img/wild-02.jpg",
+        "/img/wild-04.jpg",
+        "/img/wild-05.jpg",
+        "/img/wild-06.jpg",
+        "/img/wild-07.jpg",
+        "/img/wild-08.jpg",
+        "/img/wild-09.jpg",
+        "/img/wild-10.jpg",
+        "/img/wild-11.jpg",
+        "/img/wild-12.jpg",
+        "/img/wild-13.jpg",
+        "/img/wild-14.jpg",
+        "/img/wild-15.jpg",
+        "/img/wild-16.jpg",
+        "/img/wild-17.jpg",
+        "/img/wild-18.jpg",
+        "/img/wild-19.jpg",
+        "/img/wild-20.jpg"
+      ]
+    }
+  ],
+  "films_title": "Films.",
+  "films_text": "Music videos, documentary and travel films. Directed, shot and edited.",
+  "films": [
+    {
+      "vimeo_id": "1227344926",
+      "title": "Noa — Leftovers",
+      "kind": "Music video",
+      "duration": "2:30",
+      "thumbnail": "/img/film-1227344926.jpg"
+    },
+    {
+      "vimeo_id": "1227355951",
+      "title": "המכתב האחרון — עידן עמדי",
+      "kind": "Music video",
+      "duration": "3:16",
+      "thumbnail": "/img/film-1227355951.jpg"
+    },
+    {
+      "vimeo_id": "1227368023",
+      "title": "יחד עד לניצחון",
+      "kind": "Documentary",
+      "duration": "1:00",
+      "thumbnail": "/img/film-1227368023.jpg"
+    },
+    {
+      "vimeo_id": "1228383778",
+      "title": "The Road to Iceland",
+      "kind": "Travel film",
+      "duration": "1:56",
+      "thumbnail": "/img/film-1228383778.jpg"
+    }
+  ],
+  "contact": {
+    "title": "Let's work together.",
+    "text": "For collaborations, productions and project inquiries, feel free to get in touch.",
+    "phone_display": "052-536-9187",
+    "phone_intl": "972525369187"
+  }
+}
