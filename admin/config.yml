@@ -23,8 +23,8 @@ collections:
             fields:
               - {label: "כותרת", name: title, widget: string}
               - {label: "שורת משנה", name: subtitle, widget: string}
-              - {label: "תמונה מרכזית (זו שהקולאז' נכנס אליה)", name: image, widget: image}
-              - {label: "קולאז' פתיחה (24 תמונות מכל העבודות)", name: collage, widget: list, field: {label: "תמונה", name: photo, widget: image}}
+              - {label: "תמונת פתיחה", name: image, widget: image}
+              - {label: "תמונת פתיחה לטלפון (לא חובה, עדיף תמונה לאורך)", name: image_mobile, widget: image, required: false}
           - {label: "משפט אודות", name: statement, widget: text}
           - label: "פרקים (צבא, מוזיקה, גלישה, טבע)"
             name: chapters

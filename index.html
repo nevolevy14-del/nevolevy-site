@@ -27,26 +27,25 @@ button{font:inherit;color:inherit}
 .nav{position:fixed;inset:0 0 auto;z-index:50;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 max(4vw,18px);background:rgba(0,0,0,.55);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(255,255,255,.06);transition:background .3s}
 .nav .brand{font-weight:600;font-size:17px;letter-spacing:-.01em}
 .nav ul{display:flex;gap:clamp(14px,3vw,34px);list-style:none;margin:0;padding:0;font-size:13px;color:#d2d2d7}
-.nav ul a{padding:14px 0;transition:color .2s}.nav ul a:hover{color:#fff}
+.nav ul a{padding:14px 0;transition:color .2s}@media(hover:hover){.nav ul a:hover{color:#fff}}
 
-/* hero: collage of all work that zooms into one frame */
-.hero{height:340vh;position:relative}
-.hero .stick{position:sticky;top:0;height:100vh;overflow:hidden;background:#000}
-.hero .stage{position:absolute;inset:0;transform-origin:50% 50%;will-change:transform}
-.hero .tile{position:absolute;will-change:transform,opacity}
-.hero .tile .in{width:100%;height:100%;overflow:hidden;border-radius:inherit;background:#111;opacity:0;transform:translateY(48px) scale(.9)}
-.hero.ready .tile .in{animation:tin 1.3s cubic-bezier(.16,.84,.24,1) forwards;animation-delay:var(--d)}
-@keyframes tin{to{opacity:1;transform:none}}
-.hero .tile img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);will-change:transform,filter}
-.hero .veil{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(0,0,0,.6) 0%,rgba(0,0,0,.22) 60%,rgba(0,0,0,.55) 100%),linear-gradient(180deg,rgba(0,0,0,0) 70%,#000 100%)}
-.hero .copy{position:absolute;inset:0;display:grid;place-content:center;text-align:center;padding:0 20px;will-change:transform,opacity}
-.hero h1{font-size:clamp(56px,11vw,168px);line-height:.95;letter-spacing:-.045em;font-weight:700;margin:0;opacity:0}
-.hero p{margin:18px 0 0;font-size:clamp(17px,2vw,24px);font-weight:500;color:#d2d2d7;letter-spacing:-.01em;opacity:0}
-.hero.ready h1{animation:hin 1.6s cubic-bezier(.16,.84,.24,1) .55s forwards}
-.hero.ready p{animation:hin 1.4s cubic-bezier(.16,.84,.24,1) .9s forwards}
-.hero.ready .cue{animation:hin 1.2s ease 1.4s forwards}
+/* hero */
+.hero{height:230vh;position:relative}
+.hero .stick{position:sticky;top:0;height:100vh;overflow:hidden;display:grid;place-items:end center;background:#000}
+.hero .ph{position:absolute;inset:0;will-change:transform,filter}
+.hero .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.hero .ph .bg{display:none}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,0) 30%,rgba(0,0,0,.15) 55%,#000 100%)}
+.hero .copy{position:relative;text-align:center;padding:0 20px 11vh;will-change:transform,opacity}
+.hero h1{font-size:clamp(56px,11vw,168px);line-height:.95;letter-spacing:-.045em;font-weight:700;margin:0;animation:hin 1.6s cubic-bezier(.16,.84,.24,1) .2s both}
+.hero p{margin:18px 0 0;font-size:clamp(17px,2vw,24px);font-weight:500;color:#d2d2d7;letter-spacing:-.01em;animation:hin 1.4s cubic-bezier(.16,.84,.24,1) .5s both}
+.hero .cue{margin-top:34px;font-size:13px;color:var(--mute);animation:hin 1.2s ease 1s both}
 @keyframes hin{from{opacity:0;filter:blur(16px);transform:scale(1.06)}to{opacity:1;filter:none;transform:none}}
-.hero .cue{margin-top:34px;font-size:13px;color:var(--mute);opacity:0}
+/* portrait screens: show the whole wide photo, never crop it */
+@media(max-aspect-ratio:1/1){
+ .hero.wide .ph .bg{display:block;filter:blur(38px) brightness(.4);transform:scale(1.25)}
+ .hero.wide .ph .fg{inset:auto 0 auto 0;top:16vh;height:auto;aspect-ratio:var(--ar);object-fit:contain}
+}
 
 /* statement */
 .statement{max-width:1100px;margin:0 auto;padding:18vh max(5vw,20px) 20vh}
@@ -72,13 +71,15 @@ button{font:inherit;color:inherit}
 .reel-head h3 small{display:block;font-size:17px;font-weight:400;color:var(--mute);letter-spacing:0;margin-top:6px}
 .arrows{display:flex;gap:10px;flex:none}
 .arrows button{width:44px;height:44px;border-radius:50%;border:0;background:#1d1d1f;cursor:pointer;display:grid;place-items:center;transition:background .2s}
-.arrows button:hover{background:#2c2c2e}
+@media(hover:hover){.arrows button:hover{background:#2c2c2e}}
 .arrows svg{width:18px;height:18px}
 .reel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px max(5vw,20px) 10px;scrollbar-width:none;scroll-padding-inline:max(5vw,20px)}
 .reel::-webkit-scrollbar{display:none}
+.count{display:none;text-align:center;font-size:13px;color:var(--mute);margin-top:12px;font-variant-numeric:tabular-nums}
+.lb{touch-action:pan-y}
 .reel button{flex:none;scroll-snap-align:start;height:min(68vh,640px);width:auto;border:0;padding:0;border-radius:18px;overflow:hidden;background:var(--card);cursor:zoom-in;position:relative}
 .reel img{height:100%;width:auto;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
-.reel button:hover img{transform:scale(1.035)}
+@media(hover:hover){.reel button:hover img{transform:scale(1.035)}}
 
 /* films */
 .films{padding:16vh max(5vw,20px) 14vh;max-width:1440px;margin:0 auto}
@@ -87,13 +88,13 @@ button{font:inherit;color:inherit}
 .fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 .film{position:relative;border:0;padding:0;border-radius:24px;overflow:hidden;background:var(--card);aspect-ratio:16/10;cursor:pointer;text-align:start}
 .film img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1),filter .6s}
-.film:hover img{transform:scale(1.04);filter:brightness(.85)}
+@media(hover:hover){.film:hover img{transform:scale(1.04);filter:brightness(.85)}}
 .film::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 50%,rgba(0,0,0,.8))}
 .film .meta{position:absolute;left:24px;right:24px;bottom:22px;z-index:2;display:flex;justify-content:space-between;align-items:end;gap:12px}
 .film b{font-size:clamp(20px,2.2vw,28px);letter-spacing:-.02em;font-weight:600;line-height:1.15}
 .film span{font-size:13px;color:#d2d2d7;white-space:nowrap}
 .play{position:absolute;inset:0;margin:auto;width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.18);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:grid;place-items:center;z-index:2;transition:transform .3s}
-.film:hover .play{transform:scale(1.08)}
+@media(hover:hover){.film:hover .play{transform:scale(1.08)}}
 .play svg{width:26px;height:26px;margin-left:4px}
 
 /* contact */
@@ -102,8 +103,8 @@ button{font:inherit;color:inherit}
 .contact p{color:var(--mute);font-size:clamp(17px,1.8vw,22px);margin:22px auto 40px;max-width:560px}
 .btns{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
 .btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 26px;border-radius:980px;font-size:17px;font-weight:500}
-.btn.pri{background:var(--blue);color:#fff}.btn.pri:hover{background:#0077ed}
-.btn.sec{border:1px solid #424245;color:var(--ink)}.btn.sec:hover{border-color:#86868b}
+.btn.pri{background:var(--blue);color:#fff}@media(hover:hover){.btn.pri:hover{background:#0077ed}}
+.btn.sec{border:1px solid #424245;color:var(--ink)}@media(hover:hover){.btn.sec:hover{border-color:#86868b}}
 .phone{margin-top:26px;font-size:15px;color:var(--mute)}
 footer{border-top:1px solid var(--line);padding:22px max(5vw,20px);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:#6e6e73}
 
@@ -126,14 +127,19 @@ footer{border-top:1px solid var(--line);padding:22px max(5vw,20px);display:flex;
 
 @media(max-width:760px){
  .fgrid{grid-template-columns:minmax(0,1fr)}
- .chapter .frame{width:86vw;height:56vh;border-radius:22px}
- .reel button{height:58vh}
+ .chapter .frame{width:86vw;height:auto;border-radius:22px}
+ .chapter .title{bottom:7vh}
+ .reel{align-items:center;gap:12px;padding:4px 20px 6px;scroll-padding-inline:20px}
+ .reel button{height:auto;width:calc(100vw - 40px);scroll-snap-align:center;scroll-snap-stop:always;cursor:default}
+ .reel img{width:100%;height:auto;max-height:78vh;object-fit:contain}
+ .count{display:block}
+ .arrows{display:none}
  .lb{padding:56px 10px}.lb .pv,.lb .nx{top:auto;bottom:16px}
  .nav ul{gap:16px}
 }
 @media(prefers-reduced-motion:reduce){
  html{scroll-behavior:auto}.rv{opacity:1;transform:none;transition:none}
- .hero{height:100vh}.hero .tile .in,.hero h1,.hero p,.hero .cue{opacity:1!important;transform:none!important;animation:none!important}.chapter .grow{height:100vh}
+ .hero{height:100vh}.hero h1,.hero p,.hero .cue{animation:none!important}.chapter .grow{height:100vh}
  .chapter .frame{width:100vw!important;height:100vh!important;border-radius:0!important}
  .statement span{color:var(--ink)}
 }
@@ -142,13 +148,13 @@ footer{border-top:1px solid var(--line);padding:22px max(5vw,20px);display:flex;
 <body>
 <nav class="nav" aria-label="Main">
   <a class="brand" href="#top">Nevo Levy</a>
-  <ul><li><a href="#work">Work</a></li><li><a href="#films">Films</a></li><li><a href="#contact">Contact</a></li></ul>
+  <ul><li><a href="#work">Work</a></li><li><a href="/gallery.html">Gallery</a></li><li><a href="#films">Films</a></li><li><a href="#contact">Contact</a></li></ul>
 </nav>
 
 <header class="hero" id="top">
   <div class="stick">
-    <div class="stage" id="stage"></div>
-    <div class="veil" id="veil"></div>
+    <div class="ph"><img class="bg" id="heroBg" src="" alt=""><img class="fg" id="heroImg" src="" alt="" fetchpriority="high"></div>
+    <div class="shade"></div>
     <div class="copy">
       <h1 id="heroTitle"></h1>
       <p id="heroSub"></p>
@@ -200,14 +206,14 @@ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const $=id=>document.getElementById(id);
 $('heroTitle').textContent=S.hero.title;$('heroSub').textContent=S.hero.subtitle;
-/* hero collage */
-const heroEl=document.querySelector('.hero'),stage=$('stage'),veil=$('veil');
-const pool=(S.hero.collage||[]).filter(Boolean);const LAND0=innerWidth>=innerHeight;const NT=LAND0?25:15,CI=LAND0?12:7;
-const pics=[];for(let i=0,k=0;i<NT;i++){if(i===CI)pics.push(S.hero.image);else{pics.push(pool.length?pool[k%pool.length]:S.hero.image);k++}}
-stage.innerHTML=pics.map((src,i)=>`<div class="tile" style="--d:${i===CI?0:(.08+((i*7)%NT)*.045).toFixed(2)}s"><div class="in"><img src="${esc(src)}" alt="" decoding="async"${i===CI?' fetchpriority="high"':''}></div></div>`).join('');
-const tiles=[...stage.children];const cImg=tiles[CI].querySelector('img');
-let ready=false;const go=()=>{if(!ready){ready=true;heroEl.classList.add('ready')}};
-cImg.complete?go():cImg.addEventListener('load',go);setTimeout(go,1800);
+/* hero: on phones use the mobile photo if one is set, otherwise show the whole wide photo */
+const heroEl=document.querySelector('.hero');
+const portrait=matchMedia('(max-aspect-ratio: 1/1)');
+const setHero=()=>{const src=(portrait.matches&&S.hero.image_mobile)?S.hero.image_mobile:S.hero.image;const im=$('heroImg');
+ if(im.getAttribute('src')!==src){im.src=src;$('heroBg').src=src}
+ const fit=()=>{const ar=im.naturalWidth/im.naturalHeight;heroEl.style.setProperty('--ar',ar);heroEl.classList.toggle('wide',ar>1.05&&!(portrait.matches&&S.hero.image_mobile))};
+ im.complete&&im.naturalWidth?fit():im.onload=fit};
+setHero();portrait.addEventListener('change',setHero);
 $('stmt').textContent=S.statement;$('filmsTitle').textContent=S.films_title;$('filmsText').textContent=S.films_text;
 $('cTitle').textContent=S.contact.title;$('cText').textContent=S.contact.text;
 $('cWa').href='https://wa.me/'+encodeURIComponent(S.contact.phone_intl);$('cTel').href='tel:+'+encodeURIComponent(S.contact.phone_intl);
@@ -226,6 +232,7 @@ document.getElementById('work').innerHTML=CHAPTERS.map(c=>`
   <div class="reel" tabindex="0" aria-label="${esc(c.reel)} gallery">
    ${GAL[c.id].map(([n,r],i)=>`<button data-cat="${c.id}" data-i="${i}" aria-label="Open photo ${i+1}"><img src="${esc(n)}" alt="" loading="lazy"></button>`).join('')}
   </div>
+  <div class="count"><span>1</span> / ${GAL[c.id].length}</div>
  </div>
 </section>`).join('');
 
@@ -241,9 +248,10 @@ const st=document.getElementById('stmt');
 st.innerHTML=st.textContent.split(' ').map(w=>`<span>${esc(w)}</span>`).join(' ');
 const words=[...st.children];
 
-/* reels: arrows + keys */
+/* reels: arrows + keys + slide counter */
 for(const w of document.querySelectorAll('.reel-wrap')){
- const reel=w.querySelector('.reel');
+ const reel=w.querySelector('.reel');const cnt=w.querySelector('.count span');
+ reel.addEventListener('scroll',()=>{const b=reel.children[0];if(!b)return;cnt.textContent=Math.min(reel.children.length,Math.round(reel.scrollLeft/(b.offsetWidth+12))+1)},{passive:true});
  const go=d=>reel.scrollBy({left:d*reel.clientWidth*.8,behavior:reduce?'auto':'smooth'});
  w.querySelectorAll('.arrows button').forEach(b=>b.addEventListener('click',()=>go(+b.dataset.dir)));
  reel.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go(1)}if(e.key==='ArrowLeft'){e.preventDefault();go(-1)}});
@@ -260,13 +268,16 @@ const open=o=>{cur=o;show();lb.classList.add('open');document.body.style.overflo
 const close=()=>{lb.classList.remove('open');lbc.innerHTML='';document.body.style.overflow=''};
 const step=d=>{if(!cur)return;if(cur.type==='img'){const L=GAL[cur.cat].length;cur.i=(cur.i+d+L)%L}else{cur.i=(cur.i+d+FILMS.length)%FILMS.length}show()};
 document.addEventListener('click',e=>{
- const b=e.target.closest('[data-cat]');if(b){open({type:'img',cat:b.dataset.cat,i:+b.dataset.i});return}
+const touchOnly=matchMedia('(hover: none)').matches&&innerWidth<760;
+ const b=e.target.closest('[data-cat]');if(b&&!touchOnly){open({type:'img',cat:b.dataset.cat,i:+b.dataset.i});return}
  const f=e.target.closest('[data-film]');if(f)open({type:'film',i:+f.dataset.film});
 });
 document.getElementById('lbx').onclick=close;
 document.getElementById('lbp').onclick=()=>step(-1);
 document.getElementById('lbn').onclick=()=>step(1);
 lb.addEventListener('click',e=>{if(e.target===lb)close()});
+let tx=null;lb.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+lb.addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(dx)>50)step(dx<0?1:-1)},{passive:true});
 addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1)});
 
 /* reveal */
@@ -274,43 +285,31 @@ const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.targ
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
 /* scroll scenes */
-const hero=heroEl,hcopy=hero.querySelector('.copy');
-let L={};
-const layout=()=>{
- const vw=innerWidth,vh=innerHeight,land=vw>=vh;const cols=NT===25?5:3,rows=5;
- let tw=cols===5?vw*.215:vw*.42,th=land?tw*.66:tw*1.28;const g=Math.max(10,tw*.045);
- const k=Math.max(1,(vh*1.06)/(rows*th+(rows-1)*g),(vw*1.06)/(cols*tw+(cols-1)*g));tw*=k;th*=k;
- const cr=Math.floor(rows/2),cc=Math.floor(cols/2);
- tiles.forEach((t,i)=>{const r=Math.floor(i/cols),c=i%cols;const x=vw/2+(c-cc)*(tw+g)-tw/2,y=vh/2+(r-cr)*(th+g)-th/2;
-  Object.assign(t.style,{left:x+'px',top:y+'px',width:tw+'px',height:th+'px',borderRadius:Math.round(tw*.035)+'px'});t._r=r-cr});
- L={tw,th,sFull:Math.max(vw/tw,vh/th)*1.005};
-};
-layout();
+const hero=heroEl,hph=hero.querySelector('.ph'),hcopy=hero.querySelector('.copy');
 const chs=[...document.querySelectorAll('.chapter .grow')].map(g=>({g,f:g.querySelector('.frame'),img:g.querySelector('.frame img'),t:g.querySelector('.title')}));
+chs.forEach(c=>c.img.addEventListener('load',()=>requestAnimationFrame(frame)));
 const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
 const ease=t=>1-Math.pow(1-t,3);
 let ticking=false;
 const frame=()=>{
  ticking=false;const vh=innerHeight,vw=innerWidth;
  const hr=hero.getBoundingClientRect();const hp=clamp(-hr.top/(hr.height-vh));
- const zt=ease(clamp((hp-.1)/.62));const sc=1+(L.sFull-1)*zt;
- stage.style.transform=`scale(${sc})`;
- tiles.forEach((t,i)=>{if(i===CI){t.style.borderRadius=`${Math.round(L.tw*.035*(1-zt))}px`;const im=t.querySelector('img');im.style.transform=`scale(${1.12-.12*zt})`;im.style.filter=`brightness(${1-.42*clamp((hp-.74)/.26)})`;return}
-  const dir=t._r===0?0:(t._r%2?1:-1);t.style.transform=`translate3d(${dir*hp*L.tw*.32}px,0,0)`;t.style.opacity=1-clamp((zt-.3)/.45)});
- veil.style.opacity=1-.75*zt;
- hcopy.style.opacity=1-clamp((hp-.04)/.16);hcopy.style.transform=`translateY(${-70*clamp(hp/.2)}px) scale(${1-.06*clamp(hp/.2)})`;
+ hph.style.transform=`scale(${1.18-.18*ease(hp)})`;hph.style.filter=`brightness(${1-.45*hp})`;
+ hcopy.style.opacity=1-clamp((hp-.35)/.4);hcopy.style.transform=`translateY(${-60*hp}px)`;
  const sr=st.getBoundingClientRect();const sp=clamp((vh*.85-sr.top)/(sr.height+vh*.3));
  const on=Math.round(sp*words.length);words.forEach((w,i)=>w.classList.toggle('on',i<on));
  for(const c of chs){
   const r=c.g.getBoundingClientRect();const p=ease(clamp((vh-r.top)/(r.height)));
-  const small=vw<760;const w0=small?86:62,h0=small?56:62;
-  c.f.style.width=`${w0+(100-w0)*p}vw`;c.f.style.height=`${h0+(100-h0)*p}vh`;c.f.style.borderRadius=`${28*(1-p)}px`;
+  const small=vw<760||vh>vw;
+  if(small){const ar=c.img.naturalWidth?c.img.naturalHeight/c.img.naturalWidth:.667;const wv=86+14*p;const hp2=Math.min(vw*wv/100*ar,vh);
+   c.f.style.width=`${wv}vw`;c.f.style.height=`${hp2}px`}
+  else{c.f.style.width=`${62+38*p}vw`;c.f.style.height=`${62+38*p}vh`}c.f.style.borderRadius=`${28*(1-p)}px`;
   c.img.style.transform=`scale(${1.08-.08*p})`;
   c.t.style.opacity=clamp((p-.45)/.3);c.t.style.transform=`translateY(${30*(1-clamp((p-.45)/.3))}px)`;
  }
 };
-if(!reduce){addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(frame)}},{passive:true});addEventListener('resize',()=>{layout();frame()});frame()}
-else{chs.forEach(c=>c.t.style.opacity=1);addEventListener('resize',layout)}
+if(!reduce){addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(frame)}},{passive:true});addEventListener('resize',frame);frame()}
+else{chs.forEach(c=>c.t.style.opacity=1)}
 })();
 </script>
 </body>

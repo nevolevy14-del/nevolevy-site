@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gallery — Nevo Levy</title>
+<meta name="description" content="All photographs by Nevo Levy — military, music, surf and wild.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* Gallery: every photo on the site, filterable by chapter, full frames (never cropped). Same system as the home page. */
+:root{color-scheme:dark;--bg:#000;--ink:#f5f5f7;--mute:#86868b;--line:#1d1d1f;--blue:#2997ff;--card:#0d0d0f}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+
+.nav{position:fixed;inset:0 0 auto;z-index:50;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 max(4vw,18px);background:rgba(0,0,0,.55);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(255,255,255,.06)}
+.nav .brand{font-weight:600;font-size:17px;letter-spacing:-.01em}
+.nav ul{display:flex;gap:clamp(14px,3vw,34px);list-style:none;margin:0;padding:0;font-size:13px;color:#d2d2d7}
+.nav ul a{padding:14px 0}.nav ul a[aria-current]{color:#fff}
+@media(hover:hover){.nav ul a:hover{color:#fff}}
+
+.head{max-width:1440px;margin:0 auto;padding:calc(52px + 12vh) max(5vw,20px) 5vh}
+.head h1{font-size:clamp(56px,10vw,144px);line-height:.95;letter-spacing:-.05em;font-weight:700;margin:0;animation:hin 1.4s cubic-bezier(.16,.84,.24,1) both}
+.head p{margin:18px 0 0;font-size:clamp(17px,1.8vw,22px);color:var(--mute);animation:hin 1.4s cubic-bezier(.16,.84,.24,1) .2s both}
+@keyframes hin{from{opacity:0;filter:blur(14px);transform:translateY(20px)}}
+
+.tabs{position:sticky;top:52px;z-index:40;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:14px max(5vw,20px);max-width:1440px;margin:0 auto;background:linear-gradient(#000 70%,rgba(0,0,0,0))}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:none;border:0;border-radius:980px;padding:9px 18px;background:#1d1d1f;color:#d2d2d7;font-size:14px;font-weight:500;cursor:pointer;transition:background .25s,color .25s}
+.tabs button[aria-pressed="true"]{background:var(--ink);color:#000}
+.tabs button small{opacity:.55;margin-left:6px;font-weight:400}
+
+.grid{max-width:1440px;margin:0 auto;padding:10px max(5vw,20px) 14vh;columns:3 340px;column-gap:16px}
+.ph{break-inside:avoid;margin:0 0 16px;border:0;padding:0;width:100%;border-radius:16px;overflow:hidden;background:var(--card);cursor:zoom-in;display:block;opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.ph.in{opacity:1;transform:none}
+.ph img{width:100%;height:auto;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+@media(hover:hover){.ph:hover img{transform:scale(1.03)}}
+@media(max-width:700px){.grid{columns:2;column-gap:10px}.ph{margin-bottom:10px;border-radius:12px}}
+
+.lb{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.96);display:none;align-items:center;justify-content:center;padding:60px 70px;touch-action:pan-y}
+.lb.open{display:flex}
+.lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px;animation:pop .4s cubic-bezier(.2,.7,.2,1)}
+.lb .x,.lb .pv,.lb .nx{position:absolute;width:44px;height:44px;border-radius:50%;border:0;background:#1d1d1f;cursor:pointer;display:grid;place-items:center}
+.lb .x{top:16px;right:16px}.lb .pv{left:16px;top:50%}.lb .nx{right:16px;top:50%}
+.lb svg{width:18px;height:18px}
+.lb .n{position:absolute;bottom:18px;left:0;right:0;text-align:center;font-size:13px;color:var(--mute);font-variant-numeric:tabular-nums}
+@keyframes pop{from{opacity:0;transform:scale(.97)}}
+@media(max-width:700px){.lb{padding:56px 0}.lb img{border-radius:0}.lb .pv,.lb .nx{display:none}}
+
+footer{border-top:1px solid var(--line);padding:22px max(5vw,20px);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:#6e6e73}
+@media(prefers-reduced-motion:reduce){.ph{opacity:1;transform:none;transition:none}.head h1,.head p{animation:none}}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Main">
+  <a class="brand" href="/">Nevo Levy</a>
+  <ul><li><a href="/#work">Work</a></li><li><a href="/gallery.html" aria-current="page">Gallery</a></li><li><a href="/#films">Films</a></li><li><a href="/#contact">Contact</a></li></ul>
+</nav>
+
+<header class="head">
+  <h1>Gallery.</h1>
+  <p id="sub">Every frame, in one place.</p>
+</header>
+
+<div class="tabs" id="tabs" role="toolbar" aria-label="Filter photos"></div>
+<main class="grid" id="grid"></main>
+
+<footer><span>© 2026 Nevo Levy. All rights reserved.</span><span>Photography · Directing · Cinematography</span></footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="x" id="x" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="pv" id="pv" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <img id="lbi" src="" alt="">
+  <button class="nx" id="nx" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button>
+  <div class="n" id="n"></div>
+</div>
+
+<script>
+(async()=>{
+/* photos come from the chapters in /content/site.json (edited at /admin) */
+const S=await (await fetch('/content/site.json',{cache:'no-store'})).json();
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const all=[];S.chapters.forEach(c=>c.photos.forEach(p=>all.push({src:p,cat:c.id,title:c.title})));
+const tabs=document.getElementById('tabs'),grid=document.getElementById('grid');
+const cats=[{id:'all',title:'All',n:all.length},...S.chapters.map(c=>({id:c.id,title:c.title.replace(/\.$/,''),n:c.photos.length}))];
+tabs.innerHTML=cats.map((c,i)=>`<button data-f="${esc(c.id)}" aria-pressed="${i===0}">${esc(c.title)}<small>${c.n}</small></button>`).join('');
+
+let shown=[];
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{rootMargin:'0px 0px -5% 0px'});
+const render=f=>{
+ shown=f==='all'?all:all.filter(p=>p.cat===f);
+ grid.innerHTML=shown.map((p,i)=>`<button class="ph" data-i="${i}" aria-label="Open photo ${i+1}"><img src="${esc(p.src)}" alt="${esc(p.title)}" loading="lazy" decoding="async"></button>`).join('');
+ grid.querySelectorAll('.ph').forEach(el=>io.observe(el));
+};
+render(new URLSearchParams(location.search).get('c')||'all');
+tabs.querySelectorAll('button').forEach(b=>{if(b.dataset.f===(new URLSearchParams(location.search).get('c')||'all'))b.setAttribute('aria-pressed','true');else b.setAttribute('aria-pressed','false')});
+tabs.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+ tabs.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));render(b.dataset.f);
+ history.replaceState(null,'',b.dataset.f==='all'?'/gallery.html':'/gallery.html?c='+b.dataset.f);
+ scrollTo({top:Math.min(scrollY,document.querySelector('.head').offsetHeight-40),behavior:'smooth'})});
+
+/* viewer: tap to open, swipe or arrows to move */
+const lb=document.getElementById('lb'),im=document.getElementById('lbi'),n=document.getElementById('n');let cur=0;
+const show=()=>{im.src=shown[cur].src;n.textContent=`${cur+1} / ${shown.length}`};
+const open=i=>{cur=i;show();lb.classList.add('open');document.body.style.overflow='hidden'};
+const close=()=>{lb.classList.remove('open');document.body.style.overflow=''};
+const step=d=>{cur=(cur+d+shown.length)%shown.length;show()};
+grid.addEventListener('click',e=>{const b=e.target.closest('.ph');if(b)open(+b.dataset.i)});
+document.getElementById('x').onclick=close;document.getElementById('pv').onclick=()=>step(-1);document.getElementById('nx').onclick=()=>step(1);
+lb.addEventListener('click',e=>{if(e.target===lb)close()});
+addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1)});
+let tx=null;lb.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+lb.addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(dx)>50)step(dx<0?1:-1)},{passive:true});
+})();
+</script>
+</body>
+</html>

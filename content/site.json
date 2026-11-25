@@ -3,32 +3,7 @@
     "title": "Nevo Levy.",
     "subtitle": "Photography. Directing. Cinematography.",
     "image": "/img/military-01.jpg",
-    "collage": [
-      "/img/wild-03.jpg",
-      "/img/music-01.jpg",
-      "/img/military-11.jpg",
-      "/img/surf-10.jpg",
-      "/img/wild-01.jpg",
-      "/img/surf-05.jpg",
-      "/img/music-04.jpg",
-      "/img/wild-19.jpg",
-      "/img/military-04.jpg",
-      "/img/surf-03.jpg",
-      "/img/music-02.jpg",
-      "/img/military-22.jpg",
-      "/img/wild-15.jpg",
-      "/img/surf-08.jpg",
-      "/img/music-13.jpg",
-      "/img/wild-09.jpg",
-      "/img/military-24.jpg",
-      "/img/military-29.jpg",
-      "/img/wild-04.jpg",
-      "/img/music-16.jpg",
-      "/img/military-09.jpg",
-      "/img/wild-17.jpg",
-      "/img/surf-11.jpg",
-      "/img/wild-02.jpg"
-    ]
+    "image_mobile": ""
   },
   "statement": "I photograph and film people at their most real. Soldiers in the field, artists under stage light, surfers at first light, and the wild, quiet places in between.",
   "chapters": [
@@ -36,7 +11,7 @@
       "id": "military",
       "title": "Military.",
       "subtitle": "Documentary work from inside Israel’s special units.",
-      "cover": "/img/military-11.jpg",
+      "cover": "/img/military-19.jpg",
       "reel_title": "In the field",
       "reel_subtitle": "Training, operations and the people behind them.",
       "photos": [
