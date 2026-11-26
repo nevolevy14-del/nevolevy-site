@@ -43,7 +43,7 @@ button{font:inherit;color:inherit}
 @keyframes hin{from{opacity:0;filter:blur(16px);transform:scale(1.06)}to{opacity:1;filter:none;transform:none}}
 /* portrait screens: show the whole wide photo, never crop it */
 @media(max-aspect-ratio:1/1){
- .chapter .frame img{object-position:var(--posm)}
+ .chapter .frame picture img{object-position:var(--posm)}
  .hero.wide .ph .bg{display:block;filter:blur(38px) brightness(.4);transform:scale(1.25)}
  .hero.wide .ph .fg{inset:auto 0 auto 0;top:calc((100vh - 100vw / var(--ar)) / 2);height:auto;aspect-ratio:var(--ar);object-fit:contain}
  .hero.wide .ph::after{content:"";position:absolute;left:0;right:0;top:calc((100vh - 100vw / var(--ar)) / 2);height:calc(100vw / var(--ar));background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.75))}

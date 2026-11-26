@@ -50,8 +50,8 @@
         "/img/military-34.jpg",
         "/img/military-35.jpg"
       ],
-      "cover_mobile": "",
-      "cover_position_mobile": "24% 50%"
+      "cover_mobile": "/img/military-03.jpg",
+      "cover_position_mobile": "50% 45%"
     },
     {
       "id": "surf",
@@ -133,8 +133,8 @@
         "/img/wild-19.jpg",
         "/img/wild-20.jpg"
       ],
-      "cover_mobile": "",
-      "cover_position_mobile": "42% 50%"
+      "cover_mobile": "/img/wild-06.jpg",
+      "cover_position_mobile": "50% 40%"
     }
   ],
   "films_title": "Films.",
