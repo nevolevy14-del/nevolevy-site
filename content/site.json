@@ -52,6 +52,28 @@
       ]
     },
     {
+      "id": "surf",
+      "title": "Surf.",
+      "subtitle": "Portugal, first light, salt and stone.",
+      "cover": "/img/surf-01.jpg",
+      "reel_title": "Surf life",
+      "reel_subtitle": "Athletes and the coast that shapes them.",
+      "photos": [
+        "/img/surf-00.jpg",
+        "/img/surf-01.jpg",
+        "/img/surf-02.jpg",
+        "/img/surf-03.jpg",
+        "/img/surf-04.jpg",
+        "/img/surf-05.jpg",
+        "/img/surf-06.jpg",
+        "/img/surf-07.jpg",
+        "/img/surf-08.jpg",
+        "/img/surf-09.jpg",
+        "/img/surf-11.jpg"
+      ],
+      "cover_position": "50% 80%"
+    },
+    {
       "id": "music",
       "title": "Music.",
       "subtitle": "Artists in the moment, on stage and off.",
@@ -74,27 +96,6 @@
         "/img/music-20.jpg",
         "/img/music-21.jpg",
         "/img/music-22.jpg"
-      ]
-    },
-    {
-      "id": "surf",
-      "title": "Surf.",
-      "subtitle": "Portugal, first light, salt and stone.",
-      "cover": "/img/surf-10.jpg",
-      "reel_title": "Surf life",
-      "reel_subtitle": "Athletes and the coast that shapes them.",
-      "photos": [
-        "/img/surf-00.jpg",
-        "/img/surf-01.jpg",
-        "/img/surf-02.jpg",
-        "/img/surf-03.jpg",
-        "/img/surf-04.jpg",
-        "/img/surf-05.jpg",
-        "/img/surf-06.jpg",
-        "/img/surf-07.jpg",
-        "/img/surf-08.jpg",
-        "/img/surf-09.jpg",
-        "/img/surf-11.jpg"
       ]
     },
     {

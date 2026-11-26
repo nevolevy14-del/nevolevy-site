@@ -35,6 +35,7 @@ collections:
               - {label: "כותרת", name: title, widget: string}
               - {label: "תיאור קצר", name: subtitle, widget: string}
               - {label: "תמונת שער", name: cover, widget: image}
+              - {label: "מיקוד תמונת השער (למשל 50% 80% = מרכז, נמוך)", name: cover_position, widget: string, required: false}
               - {label: "כותרת הגלריה", name: reel_title, widget: string}
               - {label: "תיאור הגלריה", name: reel_subtitle, widget: string}
               - {label: "תמונות בגלריה", name: photos, widget: list, field: {label: "תמונה", name: photo, widget: image}}

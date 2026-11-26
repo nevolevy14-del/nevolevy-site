@@ -44,7 +44,13 @@ button{font:inherit;color:inherit}
 /* portrait screens: show the whole wide photo, never crop it */
 @media(max-aspect-ratio:1/1){
  .hero.wide .ph .bg{display:block;filter:blur(38px) brightness(.4);transform:scale(1.25)}
- .hero.wide .ph .fg{inset:auto 0 auto 0;top:16vh;height:auto;aspect-ratio:var(--ar);object-fit:contain}
+ .hero.wide .ph .fg{inset:auto 0 auto 0;top:calc((100vh - 100vw / var(--ar)) / 2);height:auto;aspect-ratio:var(--ar);object-fit:contain}
+ .hero.wide .ph::after{content:"";position:absolute;left:0;right:0;top:calc((100vh - 100vw / var(--ar)) / 2);height:calc(100vw / var(--ar));background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.75))}
+ .hero.wide .shade{display:none}
+ .hero.wide .copy{padding-bottom:calc((100vh - 100vw / var(--ar)) / 2 + 16px)}
+ .hero.wide h1{font-size:clamp(44px,13vw,72px)}
+ .hero.wide p{margin-top:8px;font-size:15px}
+ .hero.wide .cue{display:none}
 }
 
 /* statement */
@@ -73,11 +79,11 @@ button{font:inherit;color:inherit}
 .arrows button{width:44px;height:44px;border-radius:50%;border:0;background:#1d1d1f;cursor:pointer;display:grid;place-items:center;transition:background .2s}
 @media(hover:hover){.arrows button:hover{background:#2c2c2e}}
 .arrows svg{width:18px;height:18px}
-.reel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px max(5vw,20px) 10px;scrollbar-width:none;scroll-padding-inline:max(5vw,20px)}
+.reel{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px max(5vw,20px) 10px;scrollbar-width:none;scroll-padding-inline:max(5vw,20px);overscroll-behavior-x:contain}
 .reel::-webkit-scrollbar{display:none}
 .count{display:none;text-align:center;font-size:13px;color:var(--mute);margin-top:12px;font-variant-numeric:tabular-nums}
 .lb{touch-action:pan-y}
-.reel button{flex:none;scroll-snap-align:start;height:min(68vh,640px);width:auto;border:0;padding:0;border-radius:18px;overflow:hidden;background:var(--card);cursor:zoom-in;position:relative}
+.reel button{flex:none;scroll-snap-align:start;scroll-snap-stop:always;height:min(68vh,640px);width:auto;border:0;padding:0;border-radius:18px;overflow:hidden;background:var(--card);cursor:zoom-in;position:relative}
 .reel img{height:100%;width:auto;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
 @media(hover:hover){.reel button:hover img{transform:scale(1.035)}}
 
@@ -128,7 +134,9 @@ footer{border-top:1px solid var(--line);padding:22px max(5vw,20px);display:flex;
 @media(max-width:760px){
  .fgrid{grid-template-columns:minmax(0,1fr)}
  .chapter .frame{width:86vw;height:auto;border-radius:22px}
- .chapter .title{bottom:7vh}
+ .chapter .title h2{font-size:clamp(38px,11vw,56px)}
+ .chapter .title p{margin-top:6px;font-size:14px;line-height:1.35;padding:0 6vw}
+ .chapter .frame::after{background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.78))}
  .reel{align-items:center;gap:12px;padding:4px 20px 6px;scroll-padding-inline:20px}
  .reel button{height:auto;width:calc(100vw - 40px);scroll-snap-align:center;scroll-snap-stop:always;cursor:default}
  .reel img{width:100%;height:auto;max-height:78vh;object-fit:contain}
@@ -223,7 +231,7 @@ const arrow=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width=
 document.getElementById('work').innerHTML=CHAPTERS.map(c=>`
 <section class="chapter" id="${c.id}">
  <div class="grow"><div class="stick">
-  <div class="frame"><img src="${esc(c.cover)}" alt="${esc(c.title)}" loading="lazy"></div>
+  <div class="frame"><img src="${esc(c.cover)}" alt="${esc(c.title)}" loading="lazy" style="object-position:${esc(c.cover_position||'50% 50%')}"></div>
   <div class="title"><h2>${esc(c.title)}</h2><p>${esc(c.sub)}</p></div>
  </div></div>
  <div class="reel-wrap">
@@ -252,7 +260,16 @@ const words=[...st.children];
 for(const w of document.querySelectorAll('.reel-wrap')){
  const reel=w.querySelector('.reel');const cnt=w.querySelector('.count span');
  reel.addEventListener('scroll',()=>{const b=reel.children[0];if(!b)return;cnt.textContent=Math.min(reel.children.length,Math.round(reel.scrollLeft/(b.offsetWidth+12))+1)},{passive:true});
- const go=d=>reel.scrollBy({left:d*reel.clientWidth*.8,behavior:reduce?'auto':'smooth'});
+ /* every arrow / swipe / trackpad flick moves exactly one photo */
+ const pos=k=>{const cs=getComputedStyle(k).scrollSnapAlign||'';const off=k.getBoundingClientRect().left-reel.getBoundingClientRect().left+reel.scrollLeft;
+  return cs.includes('center')?off-(reel.clientWidth-k.offsetWidth)/2:off-(parseFloat(getComputedStyle(reel).scrollPaddingLeft)||0)};
+ const curIdx=()=>{const kids=[...reel.children];let best=0,bd=1e9;kids.forEach((k,i)=>{const d=Math.abs(pos(k)-reel.scrollLeft);if(d<bd){bd=d;best=i}});return best};
+ const go=d=>{const kids=reel.children;const i=Math.max(0,Math.min(kids.length-1,curIdx()+d));reel.scrollTo({left:pos(kids[i]),behavior:reduce?'auto':'smooth'})};
+ let wl=false,wt;reel.addEventListener('wheel',e=>{if(Math.abs(e.deltaX)<=Math.abs(e.deltaY)||Math.abs(e.deltaX)<3)return;e.preventDefault();
+  clearTimeout(wt);wt=setTimeout(()=>wl=false,240);if(!wl){wl=true;go(e.deltaX>0?1:-1)}},{passive:false});
+ let t0=null,i0=0;reel.addEventListener('touchstart',e=>{t0=e.touches[0].clientX;i0=curIdx()},{passive:true});
+ reel.addEventListener('touchend',e=>{if(t0===null)return;const dx=e.changedTouches[0].clientX-t0;t0=null;
+  if(Math.abs(dx)>30){const tgt=Math.max(0,Math.min(reel.children.length-1,i0+(dx<0?1:-1)));setTimeout(()=>{if(curIdx()!==tgt)reel.scrollTo({left:pos(reel.children[tgt]),behavior:'smooth'})},380)}},{passive:true});
  w.querySelectorAll('.arrows button').forEach(b=>b.addEventListener('click',()=>go(+b.dataset.dir)));
  reel.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();go(1)}if(e.key==='ArrowLeft'){e.preventDefault();go(-1)}});
 }
@@ -302,7 +319,7 @@ const frame=()=>{
   const r=c.g.getBoundingClientRect();const p=ease(clamp((vh-r.top)/(r.height)));
   const small=vw<760||vh>vw;
   if(small){const ar=c.img.naturalWidth?c.img.naturalHeight/c.img.naturalWidth:.667;const wv=86+14*p;const hp2=Math.min(vw*wv/100*ar,vh);
-   c.f.style.width=`${wv}vw`;c.f.style.height=`${hp2}px`}
+   c.f.style.width=`${wv}vw`;c.f.style.height=`${hp2}px`;c.t.style.bottom=`${(vh-hp2)/2+14}px`}
   else{c.f.style.width=`${62+38*p}vw`;c.f.style.height=`${62+38*p}vh`}c.f.style.borderRadius=`${28*(1-p)}px`;
   c.img.style.transform=`scale(${1.08-.08*p})`;
   c.t.style.opacity=clamp((p-.45)/.3);c.t.style.transform=`translateY(${30*(1-clamp((p-.45)/.3))}px)`;
