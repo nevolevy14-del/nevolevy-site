@@ -43,6 +43,7 @@ button{font:inherit;color:inherit}
 @keyframes hin{from{opacity:0;filter:blur(16px);transform:scale(1.06)}to{opacity:1;filter:none;transform:none}}
 /* portrait screens: show the whole wide photo, never crop it */
 @media(max-aspect-ratio:1/1){
+ .chapter .frame img{object-position:var(--posm)}
  .hero.wide .ph .bg{display:block;filter:blur(38px) brightness(.4);transform:scale(1.25)}
  .hero.wide .ph .fg{inset:auto 0 auto 0;top:calc((100vh - 100vw / var(--ar)) / 2);height:auto;aspect-ratio:var(--ar);object-fit:contain}
  .hero.wide .ph::after{content:"";position:absolute;left:0;right:0;top:calc((100vh - 100vw / var(--ar)) / 2);height:calc(100vw / var(--ar));background:linear-gradient(180deg,rgba(0,0,0,0) 35%,rgba(0,0,0,.75))}
@@ -64,7 +65,8 @@ button{font:inherit;color:inherit}
 .chapter .grow{height:200vh;position:relative}
 .chapter .stick{position:sticky;top:0;height:100vh;display:grid;place-items:center;overflow:hidden}
 .chapter .frame{position:relative;width:62vw;height:62vh;border-radius:28px;overflow:hidden;will-change:width,height,border-radius}
-.chapter .frame img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);will-change:transform}
+.chapter .frame picture{display:contents}
+.chapter .frame img{width:100%;height:100%;object-fit:cover;object-position:var(--pos);transform:scale(1.08);will-change:transform}
 .chapter .frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.7))}
 .chapter .title{position:absolute;left:0;right:0;bottom:9vh;text-align:center;z-index:2;padding:0 20px;will-change:opacity,transform}
 .chapter .title h2{font-size:clamp(44px,8vw,120px);line-height:1;letter-spacing:-.045em;font-weight:700;margin:0}
@@ -133,10 +135,10 @@ footer{border-top:1px solid var(--line);padding:22px max(5vw,20px);display:flex;
 
 @media(max-width:760px){
  .fgrid{grid-template-columns:minmax(0,1fr)}
- .chapter .frame{width:86vw;height:auto;border-radius:22px}
- .chapter .title h2{font-size:clamp(38px,11vw,56px)}
- .chapter .title p{margin-top:6px;font-size:14px;line-height:1.35;padding:0 6vw}
- .chapter .frame::after{background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.78))}
+ .chapter .frame{width:84vw;height:62vh;border-radius:22px}
+ .chapter .title{bottom:12vh}
+ .chapter .title h2{font-size:clamp(46px,14vw,72px)}
+ .chapter .title p{margin-top:8px;font-size:15px;line-height:1.4;padding:0 6vw}
  .reel{align-items:center;gap:12px;padding:4px 20px 6px;scroll-padding-inline:20px}
  .reel button{height:auto;width:calc(100vw - 40px);scroll-snap-align:center;scroll-snap-stop:always;cursor:default}
  .reel img{width:100%;height:auto;max-height:78vh;object-fit:contain}
@@ -231,7 +233,7 @@ const arrow=d=>`<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width=
 document.getElementById('work').innerHTML=CHAPTERS.map(c=>`
 <section class="chapter" id="${c.id}">
  <div class="grow"><div class="stick">
-  <div class="frame"><img src="${esc(c.cover)}" alt="${esc(c.title)}" loading="lazy" style="object-position:${esc(c.cover_position||'50% 50%')}"></div>
+  <div class="frame"><picture>${c.cover_mobile?`<source media="(max-aspect-ratio: 1/1)" srcset="${esc(c.cover_mobile)}">`:''}<img src="${esc(c.cover)}" alt="${esc(c.title)}" loading="lazy" style="--pos:${esc(c.cover_position||'50% 50%')};--posm:${esc(c.cover_position_mobile||c.cover_position||'50% 50%')}"></picture></div>
   <div class="title"><h2>${esc(c.title)}</h2><p>${esc(c.sub)}</p></div>
  </div></div>
  <div class="reel-wrap">
@@ -318,8 +320,7 @@ const frame=()=>{
  for(const c of chs){
   const r=c.g.getBoundingClientRect();const p=ease(clamp((vh-r.top)/(r.height)));
   const small=vw<760||vh>vw;
-  if(small){const ar=c.img.naturalWidth?c.img.naturalHeight/c.img.naturalWidth:.667;const wv=86+14*p;const hp2=Math.min(vw*wv/100*ar,vh);
-   c.f.style.width=`${wv}vw`;c.f.style.height=`${hp2}px`;c.t.style.bottom=`${(vh-hp2)/2+14}px`}
+  if(small){c.f.style.width=`${84+16*p}vw`;c.f.style.height=`${62+38*p}vh`}
   else{c.f.style.width=`${62+38*p}vw`;c.f.style.height=`${62+38*p}vh`}c.f.style.borderRadius=`${28*(1-p)}px`;
   c.img.style.transform=`scale(${1.08-.08*p})`;
   c.t.style.opacity=clamp((p-.45)/.3);c.t.style.transform=`translateY(${30*(1-clamp((p-.45)/.3))}px)`;

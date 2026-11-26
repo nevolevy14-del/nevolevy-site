@@ -49,7 +49,9 @@
         "/img/military-33.jpg",
         "/img/military-34.jpg",
         "/img/military-35.jpg"
-      ]
+      ],
+      "cover_mobile": "",
+      "cover_position_mobile": "24% 50%"
     },
     {
       "id": "surf",
@@ -71,7 +73,9 @@
         "/img/surf-09.jpg",
         "/img/surf-11.jpg"
       ],
-      "cover_position": "50% 80%"
+      "cover_position": "50% 80%",
+      "cover_mobile": "",
+      "cover_position_mobile": "50% 60%"
     },
     {
       "id": "music",
@@ -96,7 +100,9 @@
         "/img/music-20.jpg",
         "/img/music-21.jpg",
         "/img/music-22.jpg"
-      ]
+      ],
+      "cover_mobile": "",
+      "cover_position_mobile": "52% 40%"
     },
     {
       "id": "wild",
@@ -126,7 +132,9 @@
         "/img/wild-18.jpg",
         "/img/wild-19.jpg",
         "/img/wild-20.jpg"
-      ]
+      ],
+      "cover_mobile": "",
+      "cover_position_mobile": "42% 50%"
     }
   ],
   "films_title": "Films.",

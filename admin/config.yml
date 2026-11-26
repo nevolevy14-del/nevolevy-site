@@ -36,6 +36,8 @@ collections:
               - {label: "תיאור קצר", name: subtitle, widget: string}
               - {label: "תמונת שער", name: cover, widget: image}
               - {label: "מיקוד תמונת השער (למשל 50% 80% = מרכז, נמוך)", name: cover_position, widget: string, required: false}
+              - {label: "תמונת שער לטלפון (לא חובה, עדיף לאורך)", name: cover_mobile, widget: image, required: false}
+              - {label: "מיקוד השער בטלפון (למשל 30% 50% = שמאלה)", name: cover_position_mobile, widget: string, required: false}
               - {label: "כותרת הגלריה", name: reel_title, widget: string}
               - {label: "תיאור הגלריה", name: reel_subtitle, widget: string}
               - {label: "תמונות בגלריה", name: photos, widget: list, field: {label: "תמונה", name: photo, widget: image}}
