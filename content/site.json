@@ -57,7 +57,7 @@
       "id": "surf",
       "title": "Surf.",
       "subtitle": "Portugal, first light, salt and stone.",
-      "cover": "/img/surf-01.jpg",
+      "cover": "/img/surf-09.jpg",
       "reel_title": "Surf life",
       "reel_subtitle": "Athletes and the coast that shapes them.",
       "photos": [
@@ -73,9 +73,9 @@
         "/img/surf-09.jpg",
         "/img/surf-11.jpg"
       ],
-      "cover_position": "50% 80%",
+      "cover_position": "50% 50%",
       "cover_mobile": "",
-      "cover_position_mobile": "50% 60%"
+      "cover_position_mobile": "47% 50%"
     },
     {
       "id": "music",
@@ -133,8 +133,8 @@
         "/img/wild-19.jpg",
         "/img/wild-20.jpg"
       ],
-      "cover_mobile": "/img/wild-06.jpg",
-      "cover_position_mobile": "50% 40%"
+      "cover_mobile": "/img/wild-01.jpg",
+      "cover_position_mobile": "56% 45%"
     }
   ],
   "films_title": "Films.",
